@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "AI-Hub",
   description: "AI Generation Platform",
+  
 };
 
 export default function RootLayout({
