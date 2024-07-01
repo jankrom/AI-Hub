@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { MessageSquare } from "lucide-react"
+import { ImageIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 
 import { formSchema } from "./constants"
@@ -16,7 +16,7 @@ import { useChat } from "ai/react"
 import Loader from "@/components/Loader"
 import { cn } from "@/lib/utils"
 
-const ConversationPage = () => {
+const ImagePage = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,11 +40,11 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="Our most advanced conversation model"
-        icon={MessageSquare}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        title="Image Generation"
+        description="Turn your prompt into an image"
+        icon={ImageIcon}
+        iconColor="text-pink-700"
+        bgColor="bg-pink-700/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -109,4 +109,4 @@ const ConversationPage = () => {
     </div>
   )
 }
-export default ConversationPage
+export default ImagePage
