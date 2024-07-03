@@ -16,8 +16,10 @@ import { Button } from "@/components/ui/button"
 import { useChat } from "ai/react"
 import Loader from "@/components/Loader"
 import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
 
 const CodePage = () => {
+  const router = useRouter()
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/code",
   })
@@ -40,6 +42,17 @@ const CodePage = () => {
     }
   })
 
+  const onSubmit = async (e: any) => {
+    try {
+      await handleSubmit(e)
+
+      form.reset()
+    } catch (error: any) {
+    } finally {
+      setTimeout(() => router.refresh(), 3000)
+    }
+  }
+
   return (
     <div>
       <Heading
@@ -53,7 +66,7 @@ const CodePage = () => {
         <div>
           <Form {...form}>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={onSubmit}
               className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
             >
               <FormField

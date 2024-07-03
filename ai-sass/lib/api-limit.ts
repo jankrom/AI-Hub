@@ -48,3 +48,22 @@ export const checkApiLimit = async () => {
 
   return false
 }
+
+export const getApiLimitCount = async () => {
+  const supabase = createClient()
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser()
+
+  if (!user) return 0
+
+  const userApiLimit = await prismadb.userApiLimit.findUnique({
+    where: { userId: user.id },
+  })
+
+  if (!userApiLimit) return 0
+
+  return userApiLimit.count
+}

@@ -5,6 +5,7 @@ import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { MessageSquare } from "lucide-react"
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 
 import { formSchema } from "./constants"
 import Heading from "@/components/Heading"
@@ -18,6 +19,7 @@ import { cn } from "@/lib/utils"
 
 const ConversationPage = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,6 +39,17 @@ const ConversationPage = () => {
     }
   })
 
+  const onSubmit = async (e: any) => {
+    try {
+      await handleSubmit(e)
+
+      form.reset()
+    } catch (error: any) {
+    } finally {
+      setTimeout(() => router.refresh(), 3000)
+    }
+  }
+
   return (
     <div>
       <Heading
@@ -50,7 +63,7 @@ const ConversationPage = () => {
         <div>
           <Form {...form}>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={onSubmit}
               className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
             >
               <FormField
