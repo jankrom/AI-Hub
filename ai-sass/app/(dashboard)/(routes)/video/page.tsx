@@ -15,9 +15,11 @@ import { Button } from "@/components/ui/button"
 
 import Loader from "@/components/Loader"
 import { useRouter } from "next/navigation"
+import { useProModal } from "@/hooks/use-pro-modal"
 
 const VideoPage = () => {
   const router = useRouter()
+  const proModal = useProModal()
   const [video, setVideo] = useState<string>("")
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -33,13 +35,11 @@ const VideoPage = () => {
 
       const response = await axios.post("/api/video", values)
 
-      console.log(response)
-      console.log(response.data)
-
       setVideo(response.data[0])
 
       form.reset()
     } catch (error: any) {
+      if (error?.response?.status === 403) proModal.onOpen()
     } finally {
       router.refresh()
     }
@@ -92,7 +92,10 @@ const VideoPage = () => {
             </div>
           )}
           {video && (
-            <video controls className="w-full mt-8 aspect-video rounded-lg border bg-black">
+            <video
+              controls
+              className="w-full mt-8 aspect-video rounded-lg border bg-black"
+            >
               <source src={video} />
             </video>
           )}

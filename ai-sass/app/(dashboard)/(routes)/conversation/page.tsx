@@ -16,10 +16,19 @@ import { Button } from "@/components/ui/button"
 import { useChat } from "ai/react"
 import Loader from "@/components/Loader"
 import { cn } from "@/lib/utils"
+import { useProModal } from "@/hooks/use-pro-modal"
 
 const ConversationPage = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat()
+  const proModal = useProModal()
   const router = useRouter()
+
+  function onResponse(response: any) {
+    if (response?.status === 403) proModal.onOpen()
+  }
+
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    onResponse,
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -15,9 +15,11 @@ import { Button } from "@/components/ui/button"
 
 import Loader from "@/components/Loader"
 import { useRouter } from "next/navigation"
+import { useProModal } from "@/hooks/use-pro-modal"
 
 const MusicPage = () => {
   const router = useRouter()
+  const proModal = useProModal()
   const [music, setMusic] = useState<string>("")
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -33,13 +35,11 @@ const MusicPage = () => {
 
       const response = await axios.post("/api/music", values)
 
-      console.log(response)
-      console.log(response.data)
-
       setMusic(response.data)
 
       form.reset()
     } catch (error: any) {
+      if (error?.response?.status === 403) proModal.onOpen()
     } finally {
       router.refresh()
     }
