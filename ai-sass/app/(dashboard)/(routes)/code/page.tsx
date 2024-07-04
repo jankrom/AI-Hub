@@ -25,6 +25,7 @@ const CodePage = () => {
 
   function onResponse(response: any) {
     if (response?.status === 403) proModal.onOpen()
+    router.refresh()
   }
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/code",
@@ -54,10 +55,7 @@ const CodePage = () => {
       await handleSubmit(e)
 
       form.reset()
-    } catch (error: any) {
-    } finally {
-      setTimeout(() => router.refresh(), 3000)
-    }
+    } catch (error: any) {}
   }
 
   return (
