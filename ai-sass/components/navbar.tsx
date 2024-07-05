@@ -12,12 +12,13 @@ import MobileSidebar from "./mobile-sidebar"
 
 interface Props {
   apiLimitCount: number
+  isPro: boolean
 }
 
-const Navbar = async ({ apiLimitCount }: Props) => {
+const Navbar = async ({ apiLimitCount, isPro = false }: Props) => {
   return (
     <div className="flex items-center p-4">
-      <MobileSidebar apiLimitCount={apiLimitCount} />
+      <MobileSidebar apiLimitCount={apiLimitCount} isPro={isPro} />
       <div className="flex w-full justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger>

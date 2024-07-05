@@ -57,7 +57,7 @@ const routes = [
     color: "text-green-700",
   },
   {
-    label: "Setting",
+    label: "Settings",
     icon: Settings,
     href: "/settings",
   },
@@ -65,9 +65,10 @@ const routes = [
 
 interface Props {
   apiLimitCount: number
+  isPro: boolean
 }
 
-const Sidebar = ({ apiLimitCount = 0 }: Props) => {
+const Sidebar = ({ apiLimitCount = 0, isPro = false }: Props) => {
   const pathname = usePathname()
   return (
     <div className="space-y-4 py-4 flex flex-col h-full text-white bg-[#111827]">
@@ -100,7 +101,7 @@ const Sidebar = ({ apiLimitCount = 0 }: Props) => {
           ))}
         </div>
       </div>
-      <FreeCounter apiLimitCount={apiLimitCount} />
+      <FreeCounter apiLimitCount={apiLimitCount} isPro={isPro} />
     </div>
   )
 }
