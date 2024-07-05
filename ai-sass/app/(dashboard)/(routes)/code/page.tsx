@@ -18,6 +18,7 @@ import Loader from "@/components/Loader"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import { useProModal } from "@/hooks/use-pro-modal"
+import toast from "react-hot-toast"
 
 const CodePage = () => {
   const router = useRouter()
@@ -25,6 +26,7 @@ const CodePage = () => {
 
   function onResponse(response: any) {
     if (response?.status === 403) proModal.onOpen()
+    else if (response?.status !== 200) toast.error("Something went wrong")
     router.refresh()
   }
   const { messages, input, handleInputChange, handleSubmit } = useChat({

@@ -5,6 +5,7 @@ import axios from "axios"
 import { Zap } from "lucide-react"
 import { Button } from "./ui/button"
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 interface Props {
   isPro: boolean
@@ -20,7 +21,7 @@ const SubscriptionButton = ({ isPro = false }: Props) => {
 
       window.location.href = response.data.url
     } catch (error) {
-      console.log(error)
+      toast.error("Something went wrong")
     } finally {
       setIsLoading(false)
     }
