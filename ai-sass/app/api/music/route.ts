@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     if (!isPro) await increaseApiLimit()
 
     return NextResponse.json(response)
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
 
     return new NextResponse(error.error.message, { status: 500 })
