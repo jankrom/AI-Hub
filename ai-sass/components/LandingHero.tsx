@@ -5,6 +5,7 @@ import Link from "next/link"
 import TypewriterComponent from "typewriter-effect"
 import { Button } from "./ui/button"
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 const LandingHero = () => {
   const [isSignedIn, setIsSignedIn] = useState(false)
@@ -57,6 +58,15 @@ const LandingHero = () => {
       </div>
       <div className="text-zinc-400 text-xs md:text-sm font-normal">
         No credit card required
+      </div>
+      <div className="w-full flex justify-center rounded-lg">
+        <Image
+          className="rounded-2xl mt-10"
+          width={1024}
+          height={632}
+          alt="Example of what website will look like"
+          src="/Hero-Image.png"
+        />
       </div>
     </div>
   )
