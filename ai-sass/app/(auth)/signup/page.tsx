@@ -23,10 +23,10 @@ export default function LoginForm() {
       </CardHeader>
       <CardContent>
         <form className="grid gap-4">
-          <Button variant="outline" className="w-full">
+          <Button className="w-full">
             <Icons.google className="mr-2 h-4 w-4" /> Google
           </Button>
-          <Button variant="outline" type="button">
+          <Button type="button">
             <Icons.gitHub className="mr-2 h-4 w-4" /> GitHub
           </Button>
           <div className="relative">

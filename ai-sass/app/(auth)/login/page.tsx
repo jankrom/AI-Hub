@@ -25,7 +25,6 @@ export default function LoginForm() {
         <div className="grid gap-4">
           <form className="grid gap-4">
             <Button
-              variant="outline"
               className="w-full"
               type="submit"
               formAction={loginWithGoogle}
@@ -33,7 +32,6 @@ export default function LoginForm() {
               <Icons.google className="mr-2 h-4 w-4" /> Google
             </Button>
             <Button
-              variant="outline"
               className="w-full"
               type="submit"
               formAction={loginWithGithub}
@@ -84,11 +82,6 @@ export default function LoginForm() {
           </Link>
         </div>
       </CardContent>
-      <form>
-        <Button type="submit" className="w-full" formAction={loginWithEmail}>
-          Log out
-        </Button>
-      </form>
     </Card>
   )
 }
